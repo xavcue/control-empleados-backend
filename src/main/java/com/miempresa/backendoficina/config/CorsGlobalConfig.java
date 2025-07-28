@@ -8,15 +8,14 @@ import org.springframework.web.filter.CorsFilter;
 
 @Configuration
 public class CorsGlobalConfig {
-
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration config = new CorsConfiguration();
         config.addAllowedOrigin("http://localhost:5173");
         config.addAllowedOrigin("https://control-empleados-frontend.vercel.app");
-        config.setAllowCredentials(true);
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
+        config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
