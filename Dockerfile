@@ -1,14 +1,10 @@
-# Imagen base oficial de Java 17
 FROM openjdk:17-jdk-slim
-
-# Crea carpeta de trabajo
 WORKDIR /app
-
-# Copia el JAR generado al contenedor
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
+COPY src ./src
+RUN ./mvnw package -DskipTests
 COPY target/backend-oficina-0.0.1-SNAPSHOT.jar app.jar
-
-# Exponer el puerto que usa Spring Boot
 EXPOSE 8080
-
-# Comando para ejecutar la app
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
