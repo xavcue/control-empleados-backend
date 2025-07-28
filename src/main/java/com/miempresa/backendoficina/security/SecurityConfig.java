@@ -29,6 +29,7 @@ public class SecurityConfig {
                 .requestMatchers("/empleados/register").permitAll()
                 .requestMatchers("/productos/**").hasAnyAuthority("ADMIN", "EMPLEADO")
                 .requestMatchers("/empleados/**").hasAnyAuthority("ADMIN", "EMPLEADO")
+                .requestMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
